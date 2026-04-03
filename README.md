@@ -49,3 +49,35 @@ Asegúrate de tener Python 3.8+ instalado en tu sistema. Clona el repositorio y 
 ```bash
 # Instalar las herramientas del arsenal
 pip install requests psutil watchdog cryptography scapy
+
+
+Configuración de VirusTotal
+Para que el módulo de escaneo de malware funcione, necesitas autenticarte con los servidores de VirusTotal. Obtén tu API Key gratuita en su plataforma y expórtala como una variable de entorno:
+
+En Linux / macOS:
+
+Bash
+export VT_API_KEY="your_api_key_here"
+En Windows (PowerShell):
+
+PowerShell
+$env:VT_API_KEY="your_api_key_here"
+💡 Nota: Para que la configuración sea permanente, considera añadir esta exportación a tu archivo ~/.bashrc, ~/.zshrc o en las Variables de Entorno del Sistema en Windows.
+
+3. Ejecución del Escáner
+Una vez configurado el entorno, puedes inicializar el motor de escaneo de cybershield.py apuntando al directorio o archivo que deseas analizar:
+
+Bash
+# Sintaxis base:
+# python cybershield.py scan <ruta_del_objetivo>
+
+# Ejemplo de ejecución:
+python cybershield.py scan /path/to/scan
+📊 ¿Qué ocurre durante la ejecución?
+Enumeración: El script recorre la ruta especificada de forma recursiva.
+
+Hashing: Genera los hashes (SHA-256) de los archivos encontrados usando el módulo de criptografía.
+
+Validación: Consulta los hashes contra la base de datos de VirusTotal.
+
+Reporte: Devuelve un informe detallado en la terminal con alertas codificadas por colores si se detectan firmas maliciosas.
